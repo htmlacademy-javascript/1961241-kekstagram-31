@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Сергей Уфимцев](https://up.htmlacademy.ru/javascript/31/user/1961241).
-* Наставник: `Anton Popov` (https://htmlacademy.ru/profile/joker).
+* Наставник: `Anton Popov`[https://htmlacademy.ru/profile/joker].
 
 ---
 
