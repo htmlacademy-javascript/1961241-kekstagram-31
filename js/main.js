@@ -1,6 +1,5 @@
-import './data.js';
 import { generatePhotos } from './data.js';
+import { addPhotos } from './small-photos.js';
 
-console.log(
-  generatePhotos()
-);
+const variousPhotos = generatePhotos();
+addPhotos(variousPhotos);

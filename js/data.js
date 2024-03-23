@@ -1,5 +1,5 @@
-import { getRandomInteger } from "./util.js";
-import { getRandomArrayElement } from "./util.js";
+import { getRandomInteger } from './util.js';
+import { getRandomArrayElement } from './util.js';
 
 const AVATARS = [
   'img/avatar-1.svg',
@@ -46,14 +46,12 @@ const SIMILAR_PHOTOS_COUNT = 25;
  * @param {Number} id идентификатор комментария
  * @returns возвращает объект со свойставми
  */
-const generateComment = (id) => {
- return {
-    id: id,
-    avatar: getRandomArrayElement(AVATARS),
-    name: getRandomArrayElement(NAMES),
-    message: getRandomArrayElement(MESSAGES),
-  }
-};
+const generateComment = (id) => ({
+  id,
+  avatar: getRandomArrayElement(AVATARS),
+  name: getRandomArrayElement(NAMES),
+  message: getRandomArrayElement(MESSAGES),
+});
 
 
 /**
@@ -74,7 +72,7 @@ const generateComments = (count) => {
 
 /**
  * Создаёт массив фотографий
- * @returns возвращает массив фотографий
+ * @returns {Array} возвращает массив фотографий
  */
 const generatePhotos = () => {
   const photos = [];
