@@ -1,9 +1,10 @@
-
-
 const variousListPhoto = document.querySelector('.pictures');
 const variousPhotoTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
-
+/**
+ * Создаёт массив мелких фотографий
+ * @param {Array} photos массив фотографий
+ */
 const addPhotos = (photos) => {
   const variousListFragment = document.createDocumentFragment();
 
