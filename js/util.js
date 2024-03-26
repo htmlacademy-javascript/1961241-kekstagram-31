@@ -1,5 +1,5 @@
 /**
- * Генерирует рандомное число из диапозона
+ * генерирует рандомное число из диапозона
  * @param {Number} a минимальное число
  * @param {Number} b максимальное число
  * @returns {Number} возвращает случайное число
@@ -14,8 +14,8 @@ const getRandomInteger = (a, b) => {
 export {getRandomInteger};
 
 /**
- * Получение случайного элемента
- * @param {Number} elements
+ * получение случайного элемента из массива
+ * @param {Array} elements массив элементов
  * @returns возвращает элемент массива случайного индекса
  */
 // const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
@@ -25,3 +25,12 @@ const getRandomArrayElement = (elements) => {
 };
 
 export {getRandomArrayElement};
+
+/**
+ * проверяет, является ли клавиша события клавиатуры клавишей Escape
+ * @param {KeyboardEvent} evt объект события клавиатуры
+ * @returns {Boolean} если клавиша Escape, условие вернет true, если нет - false
+ */
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {isEscapeKey};
