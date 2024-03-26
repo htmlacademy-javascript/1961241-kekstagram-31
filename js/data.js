@@ -42,9 +42,9 @@ const SIMILAR_PHOTOS_COUNT = 25;
 
 
 /**
- * Генерирует комментарий на основе переданного идентефикатора
+ * генерирует комментарий на основе переданного идентефикатора
  * @param {Number} id идентификатор комментария
- * @returns возвращает объект со свойставми
+ * @returns {Object} возвращает объект со свойставми
  */
 const generateComment = (id) => ({
   id,
@@ -55,9 +55,9 @@ const generateComment = (id) => ({
 
 
 /**
- * Генерирует массив коментариев заданного количества
+ * генерирует массив коментариев заданного количества
  * @param {Number} count количество комментариев
- * @returns возвращает массив комментариев
+ * @returns {Array} возвращает массив комментариев
  */
 const generateComments = (count) => {
   const comments = [];
@@ -71,7 +71,7 @@ const generateComments = (count) => {
 
 
 /**
- * Создаёт массив фотографий
+ * создаёт массив фотографий
  * @returns {Array} возвращает массив фотографий
  */
 const generatePhotos = () => {
@@ -91,7 +91,5 @@ const generatePhotos = () => {
   }
   return photos;
 };
-
-// const photosDate = generatePhotos();
 
 export {generatePhotos};
