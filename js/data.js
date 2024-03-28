@@ -28,6 +28,12 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
+const DESCRIPTIONS = [
+  'Хорошая фотография',
+  'Плохая фотография',
+  'Интересный ракурс',
+];
+
 const Like = {
   MIN: 15,
   MAX: 200,
@@ -42,9 +48,9 @@ const SIMILAR_PHOTOS_COUNT = 25;
 
 
 /**
- * Генерирует комментарий на основе переданного идентефикатора
+ * генерирует комментарий на основе переданного идентефикатора
  * @param {Number} id идентификатор комментария
- * @returns возвращает объект со свойставми
+ * @returns {Object} возвращает объект со свойставми
  */
 const generateComment = (id) => ({
   id,
@@ -55,9 +61,9 @@ const generateComment = (id) => ({
 
 
 /**
- * Генерирует массив коментариев заданного количества
+ * генерирует массив коментариев заданного количества
  * @param {Number} count количество комментариев
- * @returns возвращает массив комментариев
+ * @returns {Array} возвращает массив комментариев
  */
 const generateComments = (count) => {
   const comments = [];
@@ -71,19 +77,18 @@ const generateComments = (count) => {
 
 
 /**
- * Создаёт массив фотографий
+ * создаёт массив фотографий
  * @returns {Array} возвращает массив фотографий
  */
 const generatePhotos = () => {
   const photos = [];
 
-  const countComments = getRandomInteger(Comment.MIN, Comment.MAX);
-
   for (let i = 1; i <= SIMILAR_PHOTOS_COUNT; i++) {
+    const countComments = getRandomInteger(Comment.MIN, Comment.MAX);
     const photo = {
       id: i,
       url: `photos/${i}.jpg`,
-      description: 'description',
+      description: getRandomArrayElement(DESCRIPTIONS),
       likes: getRandomInteger(Like.MIN, Like.MAX),
       comments: generateComments(countComments),
     };
@@ -91,7 +96,5 @@ const generatePhotos = () => {
   }
   return photos;
 };
-
-// const photosDate = generatePhotos();
 
 export {generatePhotos};
