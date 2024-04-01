@@ -1,13 +1,10 @@
 import { isEscapeKey } from './util.js';
+import { openComments, closeComments } from './util-comments.js';
 
 const bodyElement = document.querySelector('body');
 const overlayElement = document.querySelector('.overlay');
 const fullPhotoOpenElement = document.querySelector('.big-picture');
 const fullPhotoCloseElement = document.querySelector('.big-picture__cancel');
-const socialComments = fullPhotoOpenElement.querySelector('.social__comments');
-const socialComment = fullPhotoOpenElement.querySelector('.social__comment');
-const socialCommentCount = fullPhotoOpenElement.querySelector('.social__comment-count');
-const loadComments = fullPhotoOpenElement.querySelector('.comments-loader');
 
 /**
  * обработчик события нажатия клавиши на фотографии
@@ -22,24 +19,6 @@ const onPhotoKeydown = (evt) => {
 };
 
 /**
- * заполняет раздел комментариев в социальной сети переданными комментариями к фотографии
- * @param {Array} photoComments массив комментариев к фотографии
- */
-const fillComments = (photoComments) => {
-  socialComments.innerHTML = '';
-
-
-  photoComments.forEach(({avatar, name, message}) => {
-    const newComment = socialComment.cloneNode(true);
-    const picture = newComment.querySelector('.social__picture');
-    picture.src = avatar;
-    picture.alt = name;
-    newComment.querySelector('.social__text').textContent = message;
-    socialComments.append(newComment);
-  });
-};
-
-/**
  * открывает большое фото и заполняет комментариями
  * @param {String} url ссылка
  * @param {Number} likes количество лайков
@@ -48,13 +27,11 @@ const fillComments = (photoComments) => {
 function openFullPhoto ({url, likes, description, comments}) {
   overlayElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
-  socialCommentCount.classList.add('hidden');
-  loadComments.classList.add('hidden');
   fullPhotoOpenElement.querySelector('img').src = url;
   fullPhotoOpenElement.querySelector('.likes-count').textContent = likes;
   fullPhotoOpenElement.querySelector('.social__caption').textContent = description;
   document.addEventListener('keydown', onPhotoKeydown);
-  fillComments(comments);
+  openComments(comments);
 }
 
 /**
@@ -64,6 +41,7 @@ function closeFullPhoto () {
   overlayElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', onPhotoKeydown);
+  closeComments();
 }
 
 fullPhotoOpenElement.addEventListener('click', () => {
