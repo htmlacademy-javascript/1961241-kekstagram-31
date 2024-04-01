@@ -28,6 +28,12 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
+const DESCRIPTIONS = [
+  'Хорошая фотография',
+  'Плохая фотография',
+  'Интересный ракурс',
+];
+
 const Like = {
   MIN: 15,
   MAX: 200,
@@ -77,13 +83,12 @@ const generateComments = (count) => {
 const generatePhotos = () => {
   const photos = [];
 
-  const countComments = getRandomInteger(Comment.MIN, Comment.MAX);
-
   for (let i = 1; i <= SIMILAR_PHOTOS_COUNT; i++) {
+    const countComments = getRandomInteger(Comment.MIN, Comment.MAX);
     const photo = {
       id: i,
       url: `photos/${i}.jpg`,
-      description: 'description',
+      description: getRandomArrayElement(DESCRIPTIONS),
       likes: getRandomInteger(Like.MIN, Like.MAX),
       comments: generateComments(countComments),
     };
