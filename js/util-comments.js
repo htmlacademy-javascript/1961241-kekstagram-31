@@ -1,6 +1,7 @@
 const STEP = 5;
 let count = 0;
 let arrayComments = [];
+let commentsLoaderClickHandler;
 const fullPhotoOpenElement = document.querySelector('.big-picture');
 const socialComments = fullPhotoOpenElement.querySelector('.social__comments');
 const socialComment = fullPhotoOpenElement.querySelector('.social__comment');
@@ -62,10 +63,11 @@ const openNextComments = () => {
 const openComments = (comments) => {
   arrayComments = comments;
   openNextComments();
-  buttonCommentsLoader.addEventListener('click', (evt) => {
+  commentsLoaderClickHandler = (evt) => {
     evt.preventDefault();
     openNextComments();
-  });
+  };
+  buttonCommentsLoader.addEventListener('click', commentsLoaderClickHandler);
 };
 
 /**
@@ -75,9 +77,7 @@ const closeComments = () => {
   buttonCommentsLoader.classList.remove('hidden');
   count = 0;
   socialComments.innerHTML = '';
-  buttonCommentsLoader.removeEventListener('click', () => {
-    openNextComments();
-  });
+  buttonCommentsLoader.removeEventListener('click', commentsLoaderClickHandler);
 };
 
 export {openComments, closeComments};
