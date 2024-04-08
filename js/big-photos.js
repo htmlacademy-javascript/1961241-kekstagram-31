@@ -44,6 +44,7 @@ function closeFullPhoto () {
   closeComments();
 }
 
+
 fullPhotoOpenElement.addEventListener('click', () => {
   openFullPhoto();
 });
