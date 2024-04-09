@@ -10,6 +10,48 @@ const hashtagInput = document.querySelector('.text__hashtags');
 const commentInput = document.querySelector('.text__description');
 const MAX_HASHTAGS = 5;
 
+const scaleControlSmaller = document.querySelector('.scale__control--smaller');
+const scaleControlBigger = document.querySelector('.scale__control--bigger');
+const scaleControlValue = document.querySelector('.scale__control--value');
+const uploadPreviewImage = document.querySelector('.img-upload__preview img');
+
+let currentScale = 100;
+
+scaleControlSmaller.addEventListener('click', () => {
+  if (currentScale > 25) {
+    currentScale -= 25;
+    applyScale();
+  }
+});
+
+scaleControlBigger.addEventListener('click', () => {
+  if (currentScale < 100) {
+    currentScale += 25;
+    applyScale();
+  }
+});
+
+function applyScale() {
+  const scaleValue = currentScale / 100;
+  uploadPreviewImage.style.transform = `scale(${scaleValue})`;
+  scaleControlValue.value = `${currentScale}%`;
+}
+
+uploadFile.addEventListener('change', () => {
+  currentScale = 100;
+  applyScale();
+});
+
+scaleControlValue.addEventListener('input', () => {
+  const value = parseInt(scaleControlValue.value, 10);
+  if (value >= 25 && value <= 100) {
+    currentScale = value;
+    applyScale();
+  }
+});
+
+export {applyScale};
+
 const onPhotoResetBtnClick = () => closePhoto();
 
 const onDocumentKeydown = (evt) => {
