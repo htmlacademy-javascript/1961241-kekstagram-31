@@ -54,6 +54,7 @@ const sliderParent = document.querySelector('.img-upload__effect-level');
 const inputValueSlider = document.querySelector('.effect-level__value');
 const uploadPreviewImage = document.querySelector('.img-upload__preview img');
 const listFilter = document.querySelector('.effects__list');
+const listFilterOriginal = listFilter.querySelector('#effect-none');
 
 /**
  * создает слайдер с использованием библиотеки noUiSlider
@@ -145,3 +146,11 @@ const applySlider = () => {
 };
 
 export {applySlider};
+
+const sliderClear = () => {
+  listFilterOriginal.checked = true;
+  hideSlider();
+  uploadPreviewImage.style.filter = '';
+};
+
+export {sliderClear};
