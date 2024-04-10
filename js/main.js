@@ -3,27 +3,30 @@ import { addPhotos } from './small-photos.js';
 import { addListeners } from './big-photos.js';
 import { applyScale, closePhoto, uploadPhoto } from './upload-form-photo.js';
 import { applySlider } from './effect-photo.js';
-import {addValidatingInputs} from './validate-form.js';
+import { addValidatingInputs } from './validate-form.js';
 import { getData } from './fetch.js';
 import { showDataError } from './allert-message.js';
+import { configFilter } from './filter.js';
 
 // const variousPhotos = generatePhotos();
 // addPhotos(variousPhotos);
 // addListeners(variousPhotos);
-uploadPhoto();
+// addPhotos();
 addValidatingInputs(closePhoto);
 applyScale();
 applySlider();
 
 
-const bootstrap = async () => {
+async function bootstrapApp() {
+  uploadPhoto();
   try {
-    const photos = await getData();
-    addPhotos(photos);
-    addListeners(photos);
-  } catch (error) {
-    showDataError(error.message);
+    const pictures = await getData();
+    addPhotos(pictures);
+    addListeners(pictures);
+    configFilter(pictures);
+  } catch {
+    showDataError();
   }
-};
+}
 
-bootstrap();
+bootstrapApp();
