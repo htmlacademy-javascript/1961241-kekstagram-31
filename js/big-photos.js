@@ -1,5 +1,5 @@
 import { isEscapeKey } from './util.js';
-import { openComments, closeComments } from './util-comments.js';
+import { openComments, closeComments } from './comments.js';
 
 const bodyElement = document.querySelector('body');
 const overlayElement = document.querySelector('.overlay');
