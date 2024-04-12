@@ -8,8 +8,8 @@ const FILTER = {
 };
 
 const SORTFUNC = {
-  random: () => 0.5 - Math.random(),
-  discussed: (a, b) => b.comments.length - a.comments.length,
+  randomFunc: () => 0.5 - Math.random(),
+  discussedFunc: (a, b) => b.comments.length - a.comments.length,
 };
 
 const MAX_PICTURE_COUNT = 10;
@@ -44,10 +44,10 @@ function applyFilter() {
     filteredPictures = pictures;
   }
   if (currentFilter === FILTER.random) {
-    filteredPictures = pictures.toSorted(SORTFUNC.random).slice(0, MAX_PICTURE_COUNT);
+    filteredPictures = pictures.toSorted(SORTFUNC.randomFunc).slice(0, MAX_PICTURE_COUNT);
   }
   if (currentFilter === FILTER.discussed) {
-    filteredPictures = pictures.toSorted(SORTFUNC.discussed);
+    filteredPictures = pictures.toSorted(SORTFUNC.discussedFunc);
   }
   debounceRender(filteredPictures);
 }

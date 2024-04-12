@@ -1,4 +1,4 @@
-import { sliderClear } from './effect-photo.js';
+import { clearSlider } from './effect-photo.js';
 import { isEscapeKey } from './util.js';
 import { resetValidation } from './validate-form.js';
 
@@ -107,7 +107,7 @@ export function closePhoto () {
   imgUploadCancelBtn.removeEventListener('click', onPhotoResetBtnClick);
   uploadFile.value = '';
   clearPhotoSize();
-  sliderClear();
+  clearSlider();
 }
 
 /**
