@@ -44,21 +44,10 @@ function closeFullPhoto () {
   closeComments();
 }
 
-
-fullPhotoOpenElement.addEventListener('click', () => {
-  openFullPhoto();
-});
-
 fullPhotoCloseElement.addEventListener('click', () => {
   closeFullPhoto();
 });
 
-document.addEventListener('keydown', (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    overlayElement.classList.add('hidden');
-  }
-});
 
 /**
  * добавляет обработчик клика по фото
