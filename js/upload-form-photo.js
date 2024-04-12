@@ -13,15 +13,18 @@ const scaleControlBigger = document.querySelector('.scale__control--bigger');
 const scaleControlValue = document.querySelector('.scale__control--value');
 const uploadPreviewImage = document.querySelector('.img-upload__preview img');
 
-let currentScale = 100;
+const MIN_SCALE = 25;
+const DEFAULT_SCALE = 100;
+
+let currentScale = DEFAULT_SCALE;
 
 /**
  * обработчик события для кнопки уменьшения масштаба
  * если текущий масштаб больше 25%, уменьшает его на 25% и применяет изменения
  */
 scaleControlSmaller.addEventListener('click', () => {
-  if (currentScale > 25) {
-    currentScale -= 25;
+  if (currentScale > MIN_SCALE) {
+    currentScale -= MIN_SCALE;
     applyScale();
   }
 });
@@ -31,8 +34,8 @@ scaleControlSmaller.addEventListener('click', () => {
  * если текущий масштаб меньше 100%, увеличивает его на 25% и применяет изменения
  */
 scaleControlBigger.addEventListener('click', () => {
-  if (currentScale < 100) {
-    currentScale += 25;
+  if (currentScale < DEFAULT_SCALE) {
+    currentScale += MIN_SCALE;
     applyScale();
   }
 });
@@ -41,7 +44,7 @@ scaleControlBigger.addEventListener('click', () => {
  * пименяет текущий масштаб к изображению и обновляет значение масштаба в поле ввода
  */
 function applyScale() {
-  const scaleValue = currentScale / 100;
+  const scaleValue = currentScale / DEFAULT_SCALE;
   uploadPreviewImage.style.transform = `scale(${scaleValue})`;
   scaleControlValue.value = `${currentScale}%`;
 }
@@ -51,7 +54,7 @@ function applyScale() {
  * устанавливает текущий масштаб в 100% и применяет его к изображению
  */
 uploadFile.addEventListener('change', () => {
-  currentScale = 100;
+  currentScale = DEFAULT_SCALE;
   applyScale();
 });
 
@@ -61,7 +64,7 @@ uploadFile.addEventListener('change', () => {
  */
 scaleControlValue.addEventListener('input', () => {
   const value = parseInt(scaleControlValue.value, 10);
-  if (value >= 25 && value <= 100) {
+  if (value >= MIN_SCALE && value <= DEFAULT_SCALE) {
     currentScale = value;
     applyScale();
   }
@@ -70,7 +73,7 @@ scaleControlValue.addEventListener('input', () => {
 export {applyScale};
 
 const clearPhotoSize = () => {
-  currentScale = 100;
+  currentScale = DEFAULT_SCALE;
   uploadPreviewImage.style.transform = 'scale(1)';
   scaleControlValue.value = '100%';
 };
