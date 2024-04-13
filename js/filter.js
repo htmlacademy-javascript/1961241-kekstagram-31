@@ -1,5 +1,6 @@
 import { addPhotos } from './small-photos.js';
 import { debounce } from './util.js';
+import { addListeners } from './big-photos.js';
 
 const MAX_PICTURE_COUNT = 10;
 
@@ -47,6 +48,7 @@ function applyFilter(currentFilter) {
     filteredPictures = pictures.toSorted(SORTFUNC.getDiscussedNum);
   }
   addPhotos(filteredPictures);
+  addListeners(filteredPictures);
 }
 
 function configFilter(picturesData) {
