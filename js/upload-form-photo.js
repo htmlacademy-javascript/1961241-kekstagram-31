@@ -88,7 +88,8 @@ const onPhotoResetBtnClick = () => closePhoto();
 /**
  * обработчик события нажатия клавиши на документе
  * если нажата клавиша Esc и фокус не находится в поле ввода хэш-тега
- * или поле ввода комментария, закрывает модальное окно фотографии
+ * или поле ввода комментария, закрывает только сообщение об ошибке, если оно открыто,
+ * или закрывает форму, если ошибок нет
  * @param {KeyboardEvent} evt - объект события клавиатуры
  */
 const onDocumentKeydown = (evt) => {
@@ -98,7 +99,12 @@ const onDocumentKeydown = (evt) => {
       document.activeElement !== textDescription
     ) {
       evt.preventDefault();
-      closePhoto();
+      const errorMessage = document.querySelector('.error');
+      if (errorMessage && !errorMessage.classList.contains('hidden')) {
+        errorMessage.classList.add('hidden');
+      } else {
+        closePhoto();
+      }
     }
   }
 };
