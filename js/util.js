@@ -29,5 +29,4 @@ function debounce (callback, timeoutDelay = DEFAULT_TIMEOUT_DELAY) {
   };
 }
 
-export {isEscapeKey};
-export {debounce};
+export {isEscapeKey, debounce};

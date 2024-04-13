@@ -151,5 +151,4 @@ const clearSlider = () => {
   uploadPreviewImage.style.filter = '';
 };
 
-export {applySlider};
-export {clearSlider};
+export {applySlider, clearSlider};

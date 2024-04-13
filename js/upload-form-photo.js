@@ -1,6 +1,6 @@
-import { clearSlider } from './effect-photo.js';
-import { isEscapeKey } from './util.js';
-import { resetValidation } from './validate-form.js';
+import {clearSlider} from './effect-photo.js';
+import {isEscapeKey} from './util.js';
+import {resetValidation} from './validate-form.js';
 
 const bodyElement = document.querySelector('body');
 const imgUpload = document.querySelector('.img-upload');
@@ -87,13 +87,19 @@ const onPhotoResetBtnClick = () => closePhoto();
 
 /**
  * обработчик события нажатия клавиши на документе
- * если нажата клавиша Esc, вызывает функцию закрытия фотографии
- * @param {KeyboardEvent} evt - Объект события клавиатуры
+ * если нажата клавиша Esc и фокус не находится в поле ввода хэш-тега
+ * или поле ввода комментария, закрывает модальное окно фотографии
+ * @param {KeyboardEvent} evt - объект события клавиатуры
  */
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    closePhoto();
+    if (
+      document.activeElement !== textHashtag &&
+      document.activeElement !== textDescription
+    ) {
+      evt.preventDefault();
+      closePhoto();
+    }
   }
 };
 
@@ -131,7 +137,4 @@ function uploadPhoto () {
   });
 }
 
-
-export {applyScale};
-export {closePhoto};
-export {uploadPhoto};
+export {applyScale, closePhoto, uploadPhoto};

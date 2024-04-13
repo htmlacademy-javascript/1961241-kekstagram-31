@@ -1,6 +1,6 @@
-import { addPhotos } from './small-photos.js';
-import { debounce } from './util.js';
-import { addListeners } from './big-photos.js';
+import {addPhotos} from './small-photos.js';
+import {debounce} from './util.js';
+import {addListeners} from './big-photos.js';
 
 const MAX_PICTURE_COUNT = 10;
 
