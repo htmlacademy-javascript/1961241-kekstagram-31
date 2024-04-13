@@ -15,10 +15,10 @@ import { configFilter } from './filter.js';
 addValidatingInputs(closePhoto);
 applyScale();
 applySlider();
-
+uploadPhoto();
 
 async function bootstrapApp() {
-  uploadPhoto();
+
   try {
     const pictures = await getData();
     addPhotos(pictures);

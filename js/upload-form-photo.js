@@ -13,6 +13,9 @@ const scaleControlBigger = document.querySelector('.scale__control--bigger');
 const scaleControlValue = document.querySelector('.scale__control--value');
 const uploadPreviewImage = document.querySelector('.img-upload__preview img');
 
+const textHashtag = document.querySelector('.text__hashtags');
+const textDescription = document.querySelector('.text__description');
+
 const MIN_SCALE = 25;
 const DEFAULT_SCALE = 100;
 
@@ -109,6 +112,8 @@ export function closePhoto () {
   document.removeEventListener('keydown', onDocumentKeydown);
   imgUploadCancelBtn.removeEventListener('click', onPhotoResetBtnClick);
   uploadFile.value = '';
+  textHashtag.value = '';
+  textDescription.value = '';
   clearPhotoSize();
   clearSlider();
 }
