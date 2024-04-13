@@ -73,8 +73,6 @@ scaleControlValue.addEventListener('input', () => {
   }
 });
 
-export {applyScale};
-
 const clearPhotoSize = () => {
   currentScale = DEFAULT_SCALE;
   uploadPreviewImage.style.transform = 'scale(1)';
@@ -105,7 +103,7 @@ const onDocumentKeydown = (evt) => {
  * удаляет обработчики событий для нажатия клавиши и кнопки сброса фотографии
  * очищает значение поля выбора файла
  */
-export function closePhoto () {
+function closePhoto () {
   resetValidation();
   imgUploadOverlay.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
@@ -124,7 +122,7 @@ export function closePhoto () {
  * добавляет класс modal-open к body и удаляет класс hidden у модального окна
  * устанавливает обработчики событий для кнопки сброса фотографии и нажатия клавиши
  */
-export function uploadPhoto () {
+function uploadPhoto () {
   uploadFile.addEventListener('change', () => {
     bodyElement.classList.add('modal-open');
     imgUploadOverlay.classList.remove('hidden');
@@ -134,3 +132,6 @@ export function uploadPhoto () {
 }
 
 
+export {applyScale};
+export {closePhoto};
+export {uploadPhoto};
