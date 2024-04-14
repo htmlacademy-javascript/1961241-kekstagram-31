@@ -1,6 +1,7 @@
 import {clearSlider} from './effect-photo.js';
 import {isEscapeKey} from './util.js';
 import {resetValidation} from './validate-form.js';
+import {showDataError} from './allert-message.js';
 
 const bodyElement = document.querySelector('body');
 const imgUpload = document.querySelector('.img-upload');
@@ -15,6 +16,8 @@ const uploadPreviewImage = document.querySelector('.img-upload__preview img');
 
 const textHashtag = document.querySelector('.text__hashtags');
 const textDescription = document.querySelector('.text__description');
+
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
 const MIN_SCALE = 25;
 const DEFAULT_SCALE = 100;
@@ -109,6 +112,17 @@ const onDocumentKeydown = (evt) => {
   }
 };
 
+const addPhoto = (uploader, preview) => {
+  const file = uploader.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+
+  if (matches) {
+    preview.src = URL.createObjectURL(file);
+  }
+};
+
 /**
  * закрывает модальное окно фотографии
  * удаляет класс hidden у элемента модального окна и modal-open у body
@@ -128,19 +142,39 @@ function closePhoto () {
   clearSlider();
 }
 
-/**
- * обработчик события выбора файла для загрузки фотографии
- * показывает модальное окно для редактирования фотографии
- * добавляет класс modal-open к body и удаляет класс hidden у модального окна
- * устанавливает обработчики событий для кнопки сброса фотографии и нажатия клавиши
- */
 function uploadPhoto () {
   uploadFile.addEventListener('change', () => {
+    const file = uploadFile.files[0];
+    const fileName = file.name.toLowerCase();
+    const matches = FILE_TYPES.some((type) => fileName.endsWith(type));
+
+    if (!matches) {
+      showDataError('Неверный тип файла');
+      return; // прерываем выполнение функции, чтобы форма не открывалась
+    }
+
+    addPhoto(uploadFile, uploadPreviewImage);
     bodyElement.classList.add('modal-open');
     imgUploadOverlay.classList.remove('hidden');
     imgUploadCancelBtn.addEventListener('click', onPhotoResetBtnClick);
     document.addEventListener('keydown', onDocumentKeydown);
   });
 }
+
+/**
+ * обработчик события выбора файла для загрузки фотографии
+ * показывает модальное окно для редактирования фотографии
+ * добавляет класс modal-open к body и удаляет класс hidden у модального окна
+ * устанавливает обработчики событий для кнопки сброса фотографии и нажатия клавиши
+ */
+// function uploadPhoto () {
+//   uploadFile.addEventListener('change', () => {
+//     addPhoto(uploadFile, uploadPreviewImage);
+//     bodyElement.classList.add('modal-open');
+//     imgUploadOverlay.classList.remove('hidden');
+//     imgUploadCancelBtn.addEventListener('click', onPhotoResetBtnClick);
+//     document.addEventListener('keydown', onDocumentKeydown);
+//   });
+// }
 
 export {applyScale, closePhoto, uploadPhoto};
