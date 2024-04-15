@@ -1,7 +1,7 @@
 import {clearSlider} from './effect-photo.js';
 import {isEscapeKey} from './util.js';
 import {resetValidation} from './validate-form.js';
-import {showDataError} from './allert-message.js';
+import {showDataError} from './alert-message.js';
 
 const bodyElement = document.querySelector('body');
 const imgUpload = document.querySelector('.img-upload');

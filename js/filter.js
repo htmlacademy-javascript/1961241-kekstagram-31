@@ -2,6 +2,9 @@ import {addPhotos} from './small-photos.js';
 import {debounce} from './util.js';
 import {addListeners} from './big-photos.js';
 
+const filterElement = document.querySelector('.img-filters');
+const ACTIVE_BUTTON_CLASS = 'img-filters__button--active';
+
 const MAX_PICTURE_COUNT = 10;
 
 const FILTER = {
@@ -16,8 +19,6 @@ const SORTFUNC = {
 };
 
 let pictures = [];
-const filterElement = document.querySelector('.img-filters');
-const ACTIVE_BUTTON_CLASS = 'img-filters__button--active';
 
 const applyFilter = (currentFilter) => {
   let filteredPictures = [];

@@ -1,5 +1,5 @@
 import {sendData} from './fetch.js';
-import {sendDataSuccess, sendDataError} from './allert-message.js';
+import {sendDataSuccess, sendDataError} from './alert-message.js';
 
 
 const NUMBER_TAGS = 5;
@@ -51,14 +51,6 @@ const checksDuplicatesHashTag = (value) => {
   // Если длина массива не равна длине Set, значит есть дубликаты
   return hashtagArray.length === hashtagSet.size;
 };
-
-// const checksDuplicatesHashTag = (value) => {
-//   const hashtagArray = getHashtagArray(value).filter((hashTag) => hashTag.length >= 1).map((arrayElement) => arrayElement.toLowerCase());
-
-//   const duplicates = hashtagArray.filter((tag, index, tags) => tags.indexOf(tag) !== index);
-
-//   return duplicates.length === 0;
-// };
 
 // - длина комментария не может быть больше 140 символов
 const checkTextareaLength = (value) => value.length <= TEXTAREA_SYMBOLS;

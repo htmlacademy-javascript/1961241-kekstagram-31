@@ -4,7 +4,7 @@ import {applyScale, closePhoto, uploadPhoto} from './upload-form-photo.js';
 import {applySlider} from './effect-photo.js';
 import {addValidatingInputs} from './validate-form.js';
 import {getData} from './fetch.js';
-import {showDataError} from './allert-message.js';
+import {showDataError} from './alert-message.js';
 import {configFilter} from './filter.js';
 
 addValidatingInputs(closePhoto);
