@@ -22,14 +22,18 @@ let pictures = [];
 
 const applyFilter = (currentFilter) => {
   let filteredPictures = [];
-  if (currentFilter === FILTER.default) {
-    filteredPictures = pictures;
-  }
-  if (currentFilter === FILTER.random) {
-    filteredPictures = pictures.toSorted(SORTFUNC.getRandomNum).slice(0, MAX_PICTURE_COUNT);
-  }
-  if (currentFilter === FILTER.discussed) {
-    filteredPictures = pictures.toSorted(SORTFUNC.getDiscussedNum);
+  switch (currentFilter) {
+    case FILTER.default:
+      filteredPictures = pictures;
+      break;
+    case FILTER.random:
+      filteredPictures = pictures.slice().sort(SORTFUNC.getRandomNum).slice(0, MAX_PICTURE_COUNT);
+      break;
+    case FILTER.discussed:
+      filteredPictures = pictures.slice().sort(SORTFUNC.getDiscussedNum);
+      break;
+    default:
+      filteredPictures = pictures;
   }
   addPhotos(filteredPictures);
   addListeners(filteredPictures);
@@ -45,7 +49,11 @@ const onFilterChange = (evt) => {
   if (activeButton === targetButton) {
     return;
   }
-  activeButton.classList.remove(ACTIVE_BUTTON_CLASS);
+
+  if (activeButton) {
+    activeButton.classList.remove(ACTIVE_BUTTON_CLASS);
+  }
+
   targetButton.classList.add(ACTIVE_BUTTON_CLASS);
   const currentFilter = targetButton.getAttribute('id');
 
@@ -58,4 +66,4 @@ const configFilter = (picturesData) => {
   pictures = picturesData;
 };
 
-export {configFilter};
+export { configFilter };
