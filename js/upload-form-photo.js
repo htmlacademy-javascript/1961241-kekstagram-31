@@ -8,11 +8,12 @@ const imgUpload = document.querySelector('.img-upload');
 const imgUploadOverlay = imgUpload.querySelector('.img-upload__overlay');
 const uploadFile = document.querySelector('#upload-file');
 const imgUploadCancelBtn = document.querySelector('#upload-cancel');
+const uploadPreviewImage = document.querySelector('.img-upload__preview img');
+const smallPreviewImagesEl = document.querySelectorAll('.effects__preview');
 
 const scaleControlSmaller = document.querySelector('.scale__control--smaller');
 const scaleControlBigger = document.querySelector('.scale__control--bigger');
 const scaleControlValue = document.querySelector('.scale__control--value');
-const uploadPreviewImage = document.querySelector('.img-upload__preview img');
 
 const textHashtag = document.querySelector('.text__hashtags');
 const textDescription = document.querySelector('.text__description');
@@ -113,15 +114,13 @@ const onDocumentKeydown = (evt) => {
   }
 };
 
-const addPhoto = (uploader, preview) => {
-  const file = uploader.files[0];
+const addPhoto = (file) => {
   const fileName = file.name.toLowerCase();
-
-  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
-
-  if (matches) {
-    preview.src = URL.createObjectURL(file);
-  }
+  uploadPreviewImage.src = URL.createObjectURL(file);
+  FILE_TYPES.some((fileType) => fileName.endsWith(fileType));
+  smallPreviewImagesEl.forEach((preview) => {
+    preview.style.backgroundImage = `url(${uploadPreviewImage.src})`;
+  });
 };
 
 /**
@@ -154,28 +153,12 @@ function uploadPhoto () {
       return; // прерываем выполнение функции, чтобы форма не открывалась
     }
 
-    addPhoto(uploadFile, uploadPreviewImage);
+    addPhoto(file);
     bodyElement.classList.add('modal-open');
     imgUploadOverlay.classList.remove('hidden');
     imgUploadCancelBtn.addEventListener('click', onPhotoResetBtnClick);
     document.addEventListener('keydown', onDocumentKeydown);
   });
 }
-
-/**
- * обработчик события выбора файла для загрузки фотографии
- * показывает модальное окно для редактирования фотографии
- * добавляет класс modal-open к body и удаляет класс hidden у модального окна
- * устанавливает обработчики событий для кнопки сброса фотографии и нажатия клавиши
- */
-// function uploadPhoto () {
-//   uploadFile.addEventListener('change', () => {
-//     addPhoto(uploadFile, uploadPreviewImage);
-//     bodyElement.classList.add('modal-open');
-//     imgUploadOverlay.classList.remove('hidden');
-//     imgUploadCancelBtn.addEventListener('click', onPhotoResetBtnClick);
-//     document.addEventListener('keydown', onDocumentKeydown);
-//   });
-// }
 
 export {applyScale, closePhoto, uploadPhoto};
