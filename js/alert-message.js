@@ -6,8 +6,11 @@ const templateDataError = document.querySelector('#data-error').content.querySel
 const templateSuccess = document.querySelector('#success').content.querySelector('.success');
 const templateError = document.querySelector('#error').content.querySelector('.error');
 
-const showDataError = () => {
+const showDataError = (errorMessage) => {
   const templateErrorClone = templateDataError.cloneNode(true);
+  const errorMessageElement = templateErrorClone.querySelector('.data-error__title');
+  errorMessageElement.textContent = errorMessage;
+
   document.body.append(templateErrorClone);
 
   setTimeout(() => {

@@ -1,5 +1,5 @@
 import {sendData} from './fetch.js';
-import {sendDataSuccess, sendDataError} from './allert-message.js';
+import {sendDataSuccess, sendDataError} from './alert-message.js';
 
 
 const NUMBER_TAGS = 5;
@@ -41,12 +41,15 @@ const checkHastTagQuantity = (value) => {
 };
 
 // - Правило: хэштеги не могут повторятся
+// для определения дубликатов лучше действовать через Set Сейчас происходит избыточный обход по массиву
 const checksDuplicatesHashTag = (value) => {
   const hashtagArray = getHashtagArray(value).filter((hashTag) => hashTag.length >= 1).map((arrayElement) => arrayElement.toLowerCase());
 
-  const duplicates = hashtagArray.filter((tag, index, tags) => tags.indexOf(tag) !== index);
+  // Создаем Set из массива хэштегов, который автоматически удалит дубликаты
+  const hashtagSet = new Set(hashtagArray);
 
-  return duplicates.length === 0;
+  // Если длина массива не равна длине Set, значит есть дубликаты
+  return hashtagArray.length === hashtagSet.size;
 };
 
 // - длина комментария не может быть больше 140 символов

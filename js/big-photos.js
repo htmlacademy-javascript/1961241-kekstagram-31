@@ -1,8 +1,7 @@
-import { isEscapeKey } from './util.js';
-import { openComments, closeComments } from './comments.js';
+import {isEscapeKey} from './util.js';
+import {openComments, closeComments} from './comments.js';
 
 const bodyElement = document.querySelector('body');
-const overlayElement = document.querySelector('.overlay');
 const fullPhotoOpenElement = document.querySelector('.big-picture');
 const fullPhotoCloseElement = document.querySelector('.big-picture__cancel');
 
@@ -24,41 +23,30 @@ const onPhotoKeydown = (evt) => {
  * @param {Number} likes количество лайков
  * @param {String} description описание фото
  */
-function openFullPhoto ({url, likes, description, comments}) {
-  overlayElement.classList.remove('hidden');
+const openFullPhoto = ({url, likes, description, comments}) => {
   bodyElement.classList.add('modal-open');
+  fullPhotoOpenElement.classList.remove('hidden');
   fullPhotoOpenElement.querySelector('img').src = url;
   fullPhotoOpenElement.querySelector('.likes-count').textContent = likes;
   fullPhotoOpenElement.querySelector('.social__caption').textContent = description;
-  document.addEventListener('keydown', onPhotoKeydown);
+  // document.addEventListener('keydown', onPhotoKeydown);
   openComments(comments);
-}
+};
 
 /**
  * закрывает большое фото
  */
 function closeFullPhoto () {
-  overlayElement.classList.add('hidden');
+  fullPhotoOpenElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', onPhotoKeydown);
   closeComments();
 }
 
-
-fullPhotoOpenElement.addEventListener('click', () => {
-  openFullPhoto();
-});
-
 fullPhotoCloseElement.addEventListener('click', () => {
   closeFullPhoto();
 });
 
-document.addEventListener('keydown', (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    overlayElement.classList.add('hidden');
-  }
-});
 
 /**
  * добавляет обработчик клика по фото
@@ -66,7 +54,8 @@ document.addEventListener('keydown', (evt) => {
  * @param {Object} photo объект с данными фотографии
  */
 const addPhotosClickHandler = (photos, photo) => {
-  photos.addEventListener('click', () => {
+  photos.addEventListener('click', (evt) => {
+    evt.preventDefault();
     openFullPhoto(photo);
     document.addEventListener('keydown', onPhotoKeydown);
   });

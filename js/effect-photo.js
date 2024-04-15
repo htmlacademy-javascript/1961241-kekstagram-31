@@ -145,12 +145,10 @@ const applySlider = () => {
   });
 };
 
-export {applySlider};
-
-const sliderClear = () => {
+const clearSlider = () => {
   listFilterOriginal.checked = true;
   hideSlider();
   uploadPreviewImage.style.filter = '';
 };
 
-export {sliderClear};
+export {applySlider, clearSlider};
