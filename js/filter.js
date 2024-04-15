@@ -66,4 +66,4 @@ const configFilter = (picturesData) => {
   pictures = picturesData;
 };
 
-export { configFilter };
+export {configFilter};
