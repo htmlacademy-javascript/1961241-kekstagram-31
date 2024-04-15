@@ -1,5 +1,5 @@
 import {addPhotos} from './small-photos.js';
-import {debounce} from './util.js';
+import {debounce, DEFAULT_TIMEOUT_DELAY} from './util.js';
 import {addListeners} from './big-photos.js';
 
 const filterElement = document.querySelector('.img-filters');
@@ -20,7 +20,7 @@ const SORTFUNC = {
 
 let pictures = [];
 
-const applyFilter = (currentFilter) => {
+const applyFilter = debounce((currentFilter) => {
   let filteredPictures = [];
   switch (currentFilter) {
     case FILTER.default:
@@ -37,7 +37,7 @@ const applyFilter = (currentFilter) => {
   }
   addPhotos(filteredPictures);
   addListeners(filteredPictures);
-};
+}, DEFAULT_TIMEOUT_DELAY);
 
 const onFilterChange = (evt) => {
   const targetButton = evt.target;
@@ -62,7 +62,7 @@ const onFilterChange = (evt) => {
 
 const configFilter = (picturesData) => {
   filterElement.classList.remove('img-filters--inactive');
-  filterElement.addEventListener('click', debounce(onFilterChange));
+  filterElement.addEventListener('click', (onFilterChange));
   pictures = picturesData;
 };
 

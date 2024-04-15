@@ -29,4 +29,4 @@ const debounce = (callback, timeoutDelay = DEFAULT_TIMEOUT_DELAY) => {
   };
 };
 
-export {isEscapeKey, debounce};
+export {isEscapeKey, debounce, DEFAULT_TIMEOUT_DELAY};
