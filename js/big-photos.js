@@ -2,7 +2,6 @@ import {isEscapeKey} from './util.js';
 import {openComments, closeComments} from './comments.js';
 
 const bodyElement = document.querySelector('body');
-const overlayElement = document.querySelector('.overlay');
 const fullPhotoOpenElement = document.querySelector('.big-picture');
 const fullPhotoCloseElement = document.querySelector('.big-picture__cancel');
 
@@ -25,12 +24,12 @@ const onPhotoKeydown = (evt) => {
  * @param {String} description описание фото
  */
 const openFullPhoto = ({url, likes, description, comments}) => {
-  overlayElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
+  fullPhotoOpenElement.classList.remove('hidden');
   fullPhotoOpenElement.querySelector('img').src = url;
   fullPhotoOpenElement.querySelector('.likes-count').textContent = likes;
   fullPhotoOpenElement.querySelector('.social__caption').textContent = description;
-  document.addEventListener('keydown', onPhotoKeydown);
+  // document.addEventListener('keydown', onPhotoKeydown);
   openComments(comments);
 };
 
@@ -38,7 +37,7 @@ const openFullPhoto = ({url, likes, description, comments}) => {
  * закрывает большое фото
  */
 function closeFullPhoto () {
-  overlayElement.classList.add('hidden');
+  fullPhotoOpenElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', onPhotoKeydown);
   closeComments();
@@ -55,7 +54,8 @@ fullPhotoCloseElement.addEventListener('click', () => {
  * @param {Object} photo объект с данными фотографии
  */
 const addPhotosClickHandler = (photos, photo) => {
-  photos.addEventListener('click', () => {
+  photos.addEventListener('click', (evt) => {
+    evt.preventDefault();
     openFullPhoto(photo);
     document.addEventListener('keydown', onPhotoKeydown);
   });
