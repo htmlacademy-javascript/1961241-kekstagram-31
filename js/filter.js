@@ -4,6 +4,7 @@ import {addListeners} from './big-photos.js';
 
 const filterElement = document.querySelector('.img-filters');
 const ACTIVE_BUTTON_CLASS = 'img-filters__button--active';
+const filterButtons = filterElement.querySelectorAll('.img-filters__button');
 
 const MAX_PICTURE_COUNT = 10;
 
@@ -41,19 +42,15 @@ const applyFilter = debounce((currentFilter) => {
 
 const onFilterChange = (evt) => {
   const targetButton = evt.target;
-  const activeButton = document.querySelector(`.${ACTIVE_BUTTON_CLASS}`);
   if (!targetButton.matches('button')) {
     return;
   }
 
-  if (activeButton === targetButton) {
+  if (targetButton.classList.contains(ACTIVE_BUTTON_CLASS)) {
     return;
   }
 
-  if (activeButton) {
-    activeButton.classList.remove(ACTIVE_BUTTON_CLASS);
-  }
-
+  filterButtons.forEach((button) => button.classList.remove(ACTIVE_BUTTON_CLASS));
   targetButton.classList.add(ACTIVE_BUTTON_CLASS);
   const currentFilter = targetButton.getAttribute('id');
 
@@ -62,7 +59,7 @@ const onFilterChange = (evt) => {
 
 const configFilter = (picturesData) => {
   filterElement.classList.remove('img-filters--inactive');
-  filterElement.addEventListener('click', (onFilterChange));
+  filterElement.addEventListener('click', onFilterChange);
   pictures = picturesData;
 };
 
