@@ -19,7 +19,22 @@ let pictures = [];
 const filterElement = document.querySelector('.img-filters');
 const ACTIVE_BUTTON_CLASS = 'img-filters__button--active';
 
-function onFilterChange(evt) {
+const applyFilter = (currentFilter) => {
+  let filteredPictures = [];
+  if (currentFilter === FILTER.default) {
+    filteredPictures = pictures;
+  }
+  if (currentFilter === FILTER.random) {
+    filteredPictures = pictures.toSorted(SORTFUNC.getRandomNum).slice(0, MAX_PICTURE_COUNT);
+  }
+  if (currentFilter === FILTER.discussed) {
+    filteredPictures = pictures.toSorted(SORTFUNC.getDiscussedNum);
+  }
+  addPhotos(filteredPictures);
+  addListeners(filteredPictures);
+};
+
+const onFilterChange = (evt) => {
   const targetButton = evt.target;
   const activeButton = document.querySelector(`.${ACTIVE_BUTTON_CLASS}`);
   if (!targetButton.matches('button')) {
@@ -34,27 +49,12 @@ function onFilterChange(evt) {
   const currentFilter = targetButton.getAttribute('id');
 
   applyFilter(currentFilter);
-}
+};
 
-function applyFilter(currentFilter) {
-  let filteredPictures = [];
-  if (currentFilter === FILTER.default) {
-    filteredPictures = pictures;
-  }
-  if (currentFilter === FILTER.random) {
-    filteredPictures = pictures.toSorted(SORTFUNC.getRandomNum).slice(0, MAX_PICTURE_COUNT);
-  }
-  if (currentFilter === FILTER.discussed) {
-    filteredPictures = pictures.toSorted(SORTFUNC.getDiscussedNum);
-  }
-  addPhotos(filteredPictures);
-  addListeners(filteredPictures);
-}
-
-function configFilter(picturesData) {
+const configFilter = (picturesData) => {
   filterElement.classList.remove('img-filters--inactive');
   filterElement.addEventListener('click', debounce(onFilterChange));
   pictures = picturesData;
-}
+};
 
 export {configFilter};

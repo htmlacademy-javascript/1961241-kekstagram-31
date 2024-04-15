@@ -25,6 +25,15 @@ const DEFAULT_SCALE = 100;
 let currentScale = DEFAULT_SCALE;
 
 /**
+ * пименяет текущий масштаб к изображению и обновляет значение масштаба в поле ввода
+ */
+const applyScale = () => {
+  const scaleValue = currentScale / DEFAULT_SCALE;
+  uploadPreviewImage.style.transform = `scale(${scaleValue})`;
+  scaleControlValue.value = `${currentScale}%`;
+};
+
+/**
  * обработчик события для кнопки уменьшения масштаба
  * если текущий масштаб больше 25%, уменьшает его на 25% и применяет изменения
  */
@@ -46,14 +55,6 @@ scaleControlBigger.addEventListener('click', () => {
   }
 });
 
-/**
- * пименяет текущий масштаб к изображению и обновляет значение масштаба в поле ввода
- */
-function applyScale() {
-  const scaleValue = currentScale / DEFAULT_SCALE;
-  uploadPreviewImage.style.transform = `scale(${scaleValue})`;
-  scaleControlValue.value = `${currentScale}%`;
-}
 
 /**
  * обработчик события для выбора файла изображения
