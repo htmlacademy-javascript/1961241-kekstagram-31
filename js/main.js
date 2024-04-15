@@ -12,8 +12,7 @@ applyScale();
 applySlider();
 uploadPhoto();
 
-async function bootstrapApp() {
-
+const bootstrapApp = async () => {
   try {
     const pictures = await getData();
     addPhotos(pictures);
@@ -22,6 +21,7 @@ async function bootstrapApp() {
   } catch {
     showDataError();
   }
-}
+};
 
 bootstrapApp();
+

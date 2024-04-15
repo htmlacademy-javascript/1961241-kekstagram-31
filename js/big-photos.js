@@ -24,7 +24,7 @@ const onPhotoKeydown = (evt) => {
  * @param {Number} likes количество лайков
  * @param {String} description описание фото
  */
-function openFullPhoto ({url, likes, description, comments}) {
+const openFullPhoto = ({url, likes, description, comments}) => {
   overlayElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
   fullPhotoOpenElement.querySelector('img').src = url;
@@ -32,7 +32,7 @@ function openFullPhoto ({url, likes, description, comments}) {
   fullPhotoOpenElement.querySelector('.social__caption').textContent = description;
   document.addEventListener('keydown', onPhotoKeydown);
   openComments(comments);
-}
+};
 
 /**
  * закрывает большое фото
