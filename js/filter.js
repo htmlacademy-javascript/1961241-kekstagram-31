@@ -34,7 +34,7 @@ const applyFilter = (currentFilter) => {
   addListeners(filteredPictures);
 };
 
-const onFilterChange = (evt) {
+const onFilterChange = (evt) => {
   const targetButton = evt.target;
   const activeButton = document.querySelector(`.${ACTIVE_BUTTON_CLASS}`);
   if (!targetButton.matches('button')) {
